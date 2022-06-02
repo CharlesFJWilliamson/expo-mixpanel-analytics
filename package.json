@@ -1,5 +1,5 @@
 {
-  "name": "@bothrs/expo-mixpanel-analytics",
+  "name": "@samdafi/expo-mixpanel-analytics",
   "version": "2.0.0",
   "description": "Mixpanel integration for use with React Native apps built on Expo 39.",
   "main": "dist/src/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bothrs/expo-mixpanel-analytics.git"
+    "url": "git+https://github.com/samdafi/expo-mixpanel-analytics.git"
   },
   "keywords": [
     "react",
