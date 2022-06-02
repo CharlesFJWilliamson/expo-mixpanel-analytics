@@ -36,37 +36,35 @@ export class ExpoMixpanelAnalytics {
       os_version: Platform.Version,
     };
 
-    Constants.getWebViewUserAgentAsync().then((userAgent) => {
-      // @ts-ignore
-      const { width, height } = Dimensions.get("window");
-      Object.assign(this.constants, {
-        screen_height: height,
-        screen_size: `${width}x${height}`,
-        screen_width: width,
-        user_agent: userAgent,
-      });
-      if (
-        Platform.OS === "ios" &&
-        Constants.platform &&
-        Constants.platform.ios
-      ) {
-        this.platform = Device.modelId;
-        this.model = Device.modelName || undefined;
-      } else {
-        this.platform = "android";
+    // This function does not appear to work consistently, just toss it
+    // and find a better way to get the user agent
+    // Constants.getWebViewUserAgentAsync().then((userAgent) => {
+    // @ts-ignore
+    const { width, height } = Dimensions.get("window");
+    Object.assign(this.constants, {
+      screen_height: height,
+      screen_size: `${width}x${height}`,
+      screen_width: width,
+      user_agent: "", //userAgent,
+    });
+    if (Platform.OS === "ios" && Constants.platform && Constants.platform.ios) {
+      this.platform = Device.modelId;
+      this.model = Device.modelName || undefined;
+    } else {
+      this.platform = "android";
+    }
+
+    AsyncStorage.getItem(this.storageKey, (_, result) => {
+      if (result) {
+        try {
+          this.superProps = JSON.parse(result) || {};
+        } catch {}
       }
 
-      AsyncStorage.getItem(this.storageKey, (_, result) => {
-        if (result) {
-          try {
-            this.superProps = JSON.parse(result) || {};
-          } catch {}
-        }
-
-        this.ready = true;
-        this._flush();
-      });
+      this.ready = true;
+      this._flush();
     });
+    // });
   }
 
   register(props: any) {
