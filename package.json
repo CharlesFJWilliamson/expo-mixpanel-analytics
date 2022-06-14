@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist src/index.js && tsc",
     "prepare": "npm run build",
-    "prepack": "yarn build"
+    "prepack": "npm run build"
   },
   "repository": {
     "type": "git",
